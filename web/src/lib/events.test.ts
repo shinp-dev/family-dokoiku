@@ -36,6 +36,31 @@ describe('event data', () => {
     expect(() => parseEvents([{ ...baseEvent, customField: true }])).toThrow()
   })
 
+  it('rejects a source URL that is not HTTP or HTTPS', () => {
+    expect(() => parseEvents([{ ...baseEvent, sourceUrl: 'abc' }])).toThrow()
+    expect(() => parseEvents([{ ...baseEvent, sourceUrl: 'ftp://example.com/event' }])).toThrow()
+  })
+
+  it('rejects dates that do not exist', () => {
+    expect(() => parseEvents([{ ...baseEvent, startDate: '2026-02-30' }])).toThrow()
+    expect(() => parseEvents([{ ...baseEvent, retrievedDate: '2026-13-01' }])).toThrow()
+    expect(parseEvents([{ ...baseEvent, startDate: '2026-02-28' }])).toHaveLength(1)
+  })
+
+  it('rejects an endDate before startDate', () => {
+    expect(() => parseEvents([{
+      ...baseEvent,
+      startDate: '2026-10-10',
+      endDate: '2026-10-01',
+    }])).toThrow()
+  })
+
+  it('rejects duplicate event IDs', () => {
+    expect(() => parseEvents([baseEvent, { ...baseEvent }])).toThrow(
+      `Duplicate event id: ${baseEvent.id}`,
+    )
+  })
+
   it('hides an event after its final day', () => {
     expect(isEventActive(baseEvent, new Date(2026, 9, 12))).toBe(true)
     expect(isEventActive(baseEvent, new Date(2026, 9, 13))).toBe(false)
@@ -55,6 +80,28 @@ describe('event data', () => {
         new Date(2026, 8, 20),
       ),
     ).toEqual([])
+  })
+
+  it('treats today as the first day of the 7-day date window', () => {
+    const inside = { ...baseEvent, id: 'inside-seven-days', startDate: '2026-09-27' }
+    const outside = { ...baseEvent, id: 'outside-seven-days', startDate: '2026-09-28' }
+
+    expect(applyEventFilters(
+      [inside, outside],
+      { ...EMPTY_FILTERS, dateWindow: '7' },
+      new Date(2026, 8, 21),
+    )).toEqual([inside])
+  })
+
+  it('treats today as the first day of the 30-day date window', () => {
+    const inside = { ...baseEvent, id: 'inside-thirty-days', startDate: '2026-10-20' }
+    const outside = { ...baseEvent, id: 'outside-thirty-days', startDate: '2026-10-21' }
+
+    expect(applyEventFilters(
+      [inside, outside],
+      { ...EMPTY_FILTERS, dateWindow: '30' },
+      new Date(2026, 8, 21),
+    )).toEqual([inside])
   })
 
   it('uses category-specific price labels and preserves stayHours', () => {
