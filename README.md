@@ -30,7 +30,7 @@
 
 ## Webサイト
 
-React + TypeScript + Vite の静的SPAは `web/` 以下にあります。イベントデータの正本は引き続きリポジトリ直下の `events.json` です。開発サーバーではルートのJSONを直接配信し、プロダクションビルドでは `web/dist/events.json` へ自動的に含めます。
+React + TypeScript + Vite の静的SPAは `web/` 以下にあります。イベントデータの正本は引き続きリポジトリ直下の `events.json` です。ブラウザは実行時にGitHubの `main` ブランチからこのJSONを直接取得し、Web側にはイベントデータのコピーを持ちません。
 
 ### ローカル起動
 
@@ -51,7 +51,7 @@ npm --prefix web run build
 
 ### Cloudflare Pages
 
-本番環境はCloudflare PagesのDirect Upload方式で運用します。GitHubとのGit Integrationは使用していないため、GitHubへpushしただけでは本番サイトは更新されません。
+本番環境はCloudflare PagesのDirect Upload方式で運用します。GitHubとのGit Integrationは使用していないため、WebコードをGitHubへpushしただけではPages上のSPAは更新されません。一方、`events.json` はブラウザがGitHubから直接取得するため、`main` へデータをpushすればPagesの再デプロイなしで表示へ反映されます。
 
 現在のPages URL:
 
@@ -70,6 +70,6 @@ npm --prefix web run build
 npx wrangler pages deploy web/dist --project-name=family-dokoiku --branch=main
 ```
 
-コード変更を含む場合は、デプロイ前に `npm --prefix web run lint` と `npm --prefix web run test` も実行します。`events.json` だけを変更した場合も、ルートのJSONを `web/dist/events.json` へ含めるため、必ず再ビルドしてからデプロイします。
+コード変更を含む場合は、デプロイ前に `npm --prefix web run lint` と `npm --prefix web run test` も実行します。`events.json` だけの変更ではCloudflare Pagesの再ビルド・再デプロイは不要です。
 
 `web/public/_redirects` にSPA fallbackを設定しているため、`/kodomoto`、`/family`、`/events/:id` を直接開いた場合も `index.html` が返ります。
