@@ -51,10 +51,25 @@ npm --prefix web run build
 
 ### Cloudflare Pages
 
-GitHubリポジトリをCloudflare Pagesへ接続し、次のビルド設定を使用します。
+本番環境はCloudflare PagesのDirect Upload方式で運用します。GitHubとのGit Integrationは使用していないため、GitHubへpushしただけでは本番サイトは更新されません。
 
-- Build command: `npm --prefix web ci && npm --prefix web run build`
-- Build output directory: `web/dist`
-- Root directory: リポジトリ直下
+現在のPages URL:
+
+- https://family-dokoiku.pages.dev/
+
+予定しているCustom Domain（未有効化）:
+
+- https://dokoiku.shinp-studio.com/
+
+リポジトリ直下で依存関係を復元してビルドし、生成された `web/dist` をWranglerで手動デプロイします。
+
+```bash
+cd D:\dev\family-dokoiku
+npm --prefix web ci
+npm --prefix web run build
+npx wrangler pages deploy web/dist --project-name=family-dokoiku --branch=main
+```
+
+コード変更を含む場合は、デプロイ前に `npm --prefix web run lint` と `npm --prefix web run test` も実行します。`events.json` だけを変更した場合も、ルートのJSONを `web/dist/events.json` へ含めるため、必ず再ビルドしてからデプロイします。
 
 `web/public/_redirects` にSPA fallbackを設定しているため、`/kodomoto`、`/family`、`/events/:id` を直接開いた場合も `index.html` が返ります。
