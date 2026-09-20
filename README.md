@@ -27,3 +27,34 @@
 ## 仕様
 
 掲載基準、除外条件、JSON項目、料金・滞在時間の定義などは [SPEC.md](./SPEC.md) を参照してください。
+
+## Webサイト
+
+React + TypeScript + Vite の静的SPAは `web/` 以下にあります。イベントデータの正本は引き続きリポジトリ直下の `events.json` です。開発サーバーではルートのJSONを直接配信し、プロダクションビルドでは `web/dist/events.json` へ自動的に含めます。
+
+### ローカル起動
+
+Node.js 22を使用します。
+
+```bash
+npm --prefix web ci
+npm --prefix web run dev
+```
+
+品質確認とプロダクションビルド:
+
+```bash
+npm --prefix web run lint
+npm --prefix web test
+npm --prefix web run build
+```
+
+### Cloudflare Pages
+
+GitHubリポジトリをCloudflare Pagesへ接続し、次のビルド設定を使用します。
+
+- Build command: `npm --prefix web ci && npm --prefix web run build`
+- Build output directory: `web/dist`
+- Root directory: リポジトリ直下
+
+`web/public/_redirects` にSPA fallbackを設定しているため、`/kodomoto`、`/family`、`/events/:id` を直接開いた場合も `index.html` が返ります。
