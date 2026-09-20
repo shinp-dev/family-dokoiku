@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shinp-dev/family-dokoiku/events.schema.json",
+  "title": "family-dokoiku events",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "category",
+      "title",
+      "startDate",
+      "venueName",
+      "address",
+      "lat",
+      "lng",
+      "price",
+      "stayHours",
+      "reservation",
+      "tags",
+      "sourceUrl",
+      "retrievedDate",
+      "officialSource"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "category": {
+        "enum": ["kodomoto", "family_event"]
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "startDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "endDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "venueName": {
+        "type": "string",
+        "minLength": 1
+      },
+      "address": {
+        "type": "string",
+        "minLength": 1
+      },
+      "lat": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "lng": {
+        "type": "number",
+        "minimum": -180,
+        "maximum": 180
+      },
+      "price": {
+        "type": ["number", "null"],
+        "minimum": 0
+      },
+      "priceNote": {
+        "type": "string"
+      },
+      "stayHours": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "reservation": {
+        "enum": ["required", "recommended", "not_required", "unknown"]
+      },
+      "targetAge": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true
+      },
+      "summary": {
+        "type": "string"
+      },
+      "character": {
+        "enum": ["sanrio", "pokemon", "paw_patrol"]
+      },
+      "sourceUrl": {
+        "type": "string",
+        "format": "uri"
+      },
+      "retrievedDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "officialSource": {
+        "type": "boolean"
+      },
+      "notes": {
+        "type": "string"
+      }
+    }
+  }
+}
