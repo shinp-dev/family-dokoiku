@@ -17,6 +17,7 @@ export default function App() {
               path="kodomoto"
               element={
                 <CategoryPage
+                  key="kodomoto"
                   category="kodomoto"
                   eyebrow="親子で夢中になれる"
                   title="こどもと"
@@ -28,6 +29,7 @@ export default function App() {
               path="family"
               element={
                 <CategoryPage
+                  key="family"
                   category="family_event"
                   eyebrow="今日は、少し特別に"
                   title="家族イベント"

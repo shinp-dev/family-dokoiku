@@ -30,7 +30,7 @@
 
 ## Webサイト
 
-React + TypeScript + Vite の静的SPAは `web/` 以下にあります。イベントデータの正本は引き続きリポジトリ直下の `events.json` です。開発サーバーではルートのJSONを直接配信し、プロダクションビルドでは `web/dist/events.json` へ自動的に含めます。
+React + TypeScript + Vite の静的SPAは `web/` 以下にあります。イベントデータの正本は引き続きリポジトリ直下の `events.json` です。ブラウザは実行時にGitHubの `main` ブランチからこのJSONを直接取得し、Web側にはイベントデータのコピーを持ちません。
 
 ### ローカル起動
 
@@ -51,10 +51,25 @@ npm --prefix web run build
 
 ### Cloudflare Pages
 
-GitHubリポジトリをCloudflare Pagesへ接続し、次のビルド設定を使用します。
+本番環境はCloudflare PagesのDirect Upload方式で運用します。GitHubとのGit Integrationは使用していないため、WebコードをGitHubへpushしただけではPages上のSPAは更新されません。一方、`events.json` はブラウザがGitHubから直接取得するため、`main` へデータをpushすればPagesの再デプロイなしで表示へ反映されます。
 
-- Build command: `npm --prefix web ci && npm --prefix web run build`
-- Build output directory: `web/dist`
-- Root directory: リポジトリ直下
+現在のPages URL:
+
+- https://family-dokoiku.pages.dev/
+
+予定しているCustom Domain（未有効化）:
+
+- https://dokoiku.shinp-studio.com/
+
+リポジトリ直下で依存関係を復元してビルドし、生成された `web/dist` をWranglerで手動デプロイします。
+
+```bash
+cd D:\dev\family-dokoiku
+npm --prefix web ci
+npm --prefix web run build
+npx wrangler pages deploy web/dist --project-name=family-dokoiku --branch=main
+```
+
+コード変更を含む場合は、デプロイ前に `npm --prefix web run lint` と `npm --prefix web run test` も実行します。`events.json` だけの変更ではCloudflare Pagesの再ビルド・再デプロイは不要です。
 
 `web/public/_redirects` にSPA fallbackを設定しているため、`/kodomoto`、`/family`、`/events/:id` を直接開いた場合も `index.html` が返ります。

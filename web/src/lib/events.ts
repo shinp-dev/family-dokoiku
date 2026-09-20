@@ -26,11 +26,37 @@ const allowedKeys = new Set([
   'sourceUrl', 'retrievedDate', 'officialSource', 'notes',
 ])
 
-const datePattern = /^\d{4}-\d{2}-\d{2}$/
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 function isOptionalString(value: unknown) {
   return value === undefined || typeof value === 'string'
+}
+
+function isHttpUrl(value: unknown) {
+  if (typeof value !== 'string') return false
+
+  try {
+    const url = new URL(value)
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
+function isIsoDate(value: unknown): value is string {
+  if (typeof value !== 'string') return false
+
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
+  if (!match) return false
+
+  const year = Number(match[1])
+  const month = Number(match[2])
+  const day = Number(match[3])
+  if (month < 1 || month > 12) return false
+
+  const isLeapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
+  const daysInMonth = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  return day >= 1 && day <= daysInMonth[month - 1]
 }
 
 export function isFamilyEvent(value: unknown): value is FamilyEvent {
@@ -51,9 +77,9 @@ export function isFamilyEvent(value: unknown): value is FamilyEvent {
     typeof event.id === 'string' && idPattern.test(event.id) &&
     validCategory &&
     typeof event.title === 'string' && event.title.length > 0 &&
-    typeof event.startDate === 'string' && datePattern.test(event.startDate) &&
-    (event.endDate === undefined ||
-      (typeof event.endDate === 'string' && datePattern.test(event.endDate))) &&
+    isIsoDate(event.startDate) &&
+    (event.endDate === undefined || isIsoDate(event.endDate)) &&
+    (event.endDate === undefined || event.endDate >= event.startDate) &&
     typeof event.venueName === 'string' && event.venueName.length > 0 &&
     typeof event.address === 'string' && event.address.length > 0 &&
     typeof event.lat === 'number' && event.lat >= -90 && event.lat <= 90 &&
@@ -64,8 +90,8 @@ export function isFamilyEvent(value: unknown): value is FamilyEvent {
     Array.isArray(event.tags) &&
     event.tags.every((tag) => typeof tag === 'string' && tag.length > 0) &&
     new Set(event.tags).size === event.tags.length &&
-    typeof event.sourceUrl === 'string' &&
-    typeof event.retrievedDate === 'string' && datePattern.test(event.retrievedDate) &&
+    isHttpUrl(event.sourceUrl) &&
+    isIsoDate(event.retrievedDate) &&
     typeof event.officialSource === 'boolean' &&
     isOptionalString(event.priceNote) &&
     isOptionalString(event.targetAge) &&
@@ -79,6 +105,15 @@ export function parseEvents(value: unknown): FamilyEvent[] {
   if (!Array.isArray(value) || !value.every(isFamilyEvent)) {
     throw new Error('events.json does not match events.schema.json')
   }
+
+  const ids = new Set<string>()
+  for (const event of value) {
+    if (ids.has(event.id)) {
+      throw new Error(`Duplicate event id: ${event.id}`)
+    }
+    ids.add(event.id)
+  }
+
   return value
 }
 
@@ -108,7 +143,7 @@ export function applyEventFilters(
   const windowEnd =
     filters.dateWindow === 'all' || filters.dateWindow === 'today'
       ? todayIso
-      : toLocalIsoDate(addDays(today, Number(filters.dateWindow)))
+      : toLocalIsoDate(addDays(today, Number(filters.dateWindow) - 1))
 
   return events.filter((event) => {
     const eventEnd = event.endDate ?? event.startDate
