@@ -3,11 +3,14 @@ import { formatDateRange, formatPrice, formatStayHours, formatTag, reservationLa
 import type { FamilyEvent } from '../types/event'
 import { Icon } from './Icon'
 
-export function EventCard({ event, onShowMap }: { event: FamilyEvent; onShowMap: () => void }) {
+export function EventCard({ event, showCategory, onShowMap }: { event: FamilyEvent; showCategory: boolean; onShowMap: () => void }) {
   return (
     <article className="event-card">
       <div className="event-card-main">
-        <p className="date-badge">{formatDateRange(event)}</p>
+        <div className="event-overline">
+          <p className="date-badge">{formatDateRange(event)}</p>
+          {showCategory && <p className={`category-label ${event.category}`}>{event.category === 'kodomoto' ? '親子で体験' : '少し特別なおでかけ'}</p>}
+        </div>
         <h2 className="event-title"><Link to={`/events/${event.id}`}>{event.title}</Link></h2>
         <p className="venue"><Icon name="pin" /> <span>{event.venueName}</span></p>
         {event.summary && <p className="summary">{event.summary}</p>}
@@ -20,8 +23,8 @@ export function EventCard({ event, onShowMap }: { event: FamilyEvent; onShowMap:
       </div>
       {event.tags.length > 0 && <ul className="tag-list" aria-label="特徴">{event.tags.slice(0, 4).map((tag) => <li className="tag" key={tag}>{formatTag(tag)}</li>)}</ul>}
       <div className="event-actions">
-        <button className="secondary-button button-with-icon" type="button" onClick={onShowMap}><Icon name="map" /> 地図で確認</button>
-        <Link className="primary-button button-with-icon" to={`/events/${event.id}`}>詳しく見る <Icon name="arrow" /></Link>
+        <button className="map-text-button button-with-icon" type="button" onClick={onShowMap}><Icon name="map" /> 地図で見る</button>
+        <Link className="detail-link button-with-icon" to={`/events/${event.id}`}>詳しく見る <Icon name="arrow" /></Link>
       </div>
     </article>
   )

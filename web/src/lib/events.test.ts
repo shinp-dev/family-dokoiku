@@ -82,26 +82,60 @@ describe('event data', () => {
     ).toEqual([])
   })
 
-  it('treats today as the first day of the 7-day date window', () => {
-    const inside = { ...baseEvent, id: 'inside-seven-days', startDate: '2026-09-27' }
-    const outside = { ...baseEvent, id: 'outside-seven-days', startDate: '2026-09-28' }
+  it('filters events happening today and tomorrow', () => {
+    const today = { ...baseEvent, id: 'today', startDate: '2026-09-21' }
+    const tomorrow = { ...baseEvent, id: 'tomorrow', startDate: '2026-09-22' }
 
     expect(applyEventFilters(
-      [inside, outside],
-      { ...EMPTY_FILTERS, dateWindow: '7' },
+      [today, tomorrow],
+      { ...EMPTY_FILTERS, dateWindow: 'today' },
       new Date(2026, 8, 21),
-    )).toEqual([inside])
+    )).toEqual([today])
+    expect(applyEventFilters(
+      [today, tomorrow],
+      { ...EMPTY_FILTERS, dateWindow: 'tomorrow' },
+      new Date(2026, 8, 21),
+    )).toEqual([tomorrow])
   })
 
-  it('treats today as the first day of the 30-day date window', () => {
-    const inside = { ...baseEvent, id: 'inside-thirty-days', startDate: '2026-10-20' }
-    const outside = { ...baseEvent, id: 'outside-thirty-days', startDate: '2026-10-21' }
+  it('filters the upcoming weekend from Saturday through Sunday', () => {
+    const saturday = { ...baseEvent, id: 'saturday', startDate: '2026-09-26' }
+    const sunday = { ...baseEvent, id: 'sunday', startDate: '2026-09-27' }
+    const monday = { ...baseEvent, id: 'monday', startDate: '2026-09-28' }
 
     expect(applyEventFilters(
-      [inside, outside],
-      { ...EMPTY_FILTERS, dateWindow: '30' },
+      [saturday, sunday, monday],
+      { ...EMPTY_FILTERS, dateWindow: 'weekend' },
       new Date(2026, 8, 21),
-    )).toEqual([inside])
+    )).toEqual([saturday, sunday])
+  })
+
+  it('keeps the remaining days when today is already the weekend', () => {
+    const saturday = { ...baseEvent, id: 'saturday', startDate: '2026-09-26' }
+    const sunday = { ...baseEvent, id: 'sunday', startDate: '2026-09-27' }
+    const monday = { ...baseEvent, id: 'monday', startDate: '2026-09-28' }
+
+    expect(applyEventFilters(
+      [saturday, sunday, monday],
+      { ...EMPTY_FILTERS, dateWindow: 'weekend' },
+      new Date(2026, 8, 26),
+    )).toEqual([saturday, sunday])
+    expect(applyEventFilters(
+      [saturday, sunday, monday],
+      { ...EMPTY_FILTERS, dateWindow: 'weekend' },
+      new Date(2026, 8, 27),
+    )).toEqual([sunday])
+  })
+
+  it('keeps every event when showing upcoming choices', () => {
+    const near = { ...baseEvent, id: 'near', startDate: '2026-09-21' }
+    const later = { ...baseEvent, id: 'later', startDate: '2026-10-21' }
+
+    expect(applyEventFilters(
+      [near, later],
+      EMPTY_FILTERS,
+      new Date(2026, 8, 21),
+    )).toEqual([near, later])
   })
 
   it('uses category-specific price labels and preserves stayHours', () => {
