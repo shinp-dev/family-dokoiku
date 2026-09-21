@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { EventMap } from '../components/EventMap'
 import { Icon } from '../components/Icon'
 import { useEvents } from '../events/useEvents'
-import { categoryPath, formatDateRange, formatPrice, formatStayHours, formatTag, reservationLabels } from '../lib/events'
+import { formatDateRange, formatPrice, formatStayHours, formatTag, reservationLabels } from '../lib/events'
 
 export function EventDetailPage() {
   const { eventId } = useParams()
@@ -15,7 +15,7 @@ export function EventDetailPage() {
 
   return (
     <div className="page-width detail-page">
-      <Link className="back-link" to={categoryPath(event.category)}><Icon name="back" /> {event.category === 'kodomoto' ? 'こどもと' : '家族イベント'}へ戻る</Link>
+      <Link className="back-link" to="/"><Icon name="back" /> イベント一覧へ戻る</Link>
       <article className="detail-card">
         <header className="detail-heading"><p className="date-badge">{formatDateRange(event)}</p><h1>{event.title}</h1></header>
         <div className="detail-body">

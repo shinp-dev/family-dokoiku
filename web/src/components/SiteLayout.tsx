@@ -21,8 +21,7 @@ export function SiteLayout() {
             <span className="brand-mark"><Icon name="map" /></span><span>どこいく？</span>
           </Link>
           <nav className="primary-nav" aria-label="メインナビゲーション">
-            <NavLink className="nav-link" to="/kodomoto">こどもと</NavLink>
-            <NavLink className="nav-link" to="/family">家族イベント</NavLink>
+            <NavLink className="nav-link" to="/" end>イベント</NavLink>
           </nav>
         </div>
       </header>

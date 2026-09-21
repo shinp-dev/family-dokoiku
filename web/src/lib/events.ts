@@ -1,6 +1,6 @@
-import type { EventCategory, FamilyEvent } from '../types/event'
+import type { FamilyEvent } from '../types/event'
 
-export type DateWindow = 'all' | 'today' | '7' | '30'
+export type DateWindow = 'today' | 'tomorrow' | 'weekend' | 'upcoming'
 export type PriceFilter = 'all' | 'free' | '1000' | '5000'
 
 export interface EventFilters {
@@ -12,7 +12,7 @@ export interface EventFilters {
 }
 
 export const EMPTY_FILTERS: EventFilters = {
-  dateWindow: 'all',
+  dateWindow: 'upcoming',
   price: 'all',
   reservationNotRequired: false,
   indoor: false,
@@ -139,17 +139,32 @@ export function applyEventFilters(
   filters: EventFilters,
   today = new Date(),
 ) {
-  const todayIso = toLocalIsoDate(today)
-  const windowEnd =
-    filters.dateWindow === 'all' || filters.dateWindow === 'today'
-      ? todayIso
-      : toLocalIsoDate(addDays(today, Number(filters.dateWindow) - 1))
+  let windowStart: string | undefined
+  let windowEnd: string | undefined
+
+  if (filters.dateWindow === 'today') {
+    windowStart = toLocalIsoDate(today)
+    windowEnd = windowStart
+  } else if (filters.dateWindow === 'tomorrow') {
+    windowStart = toLocalIsoDate(addDays(today, 1))
+    windowEnd = windowStart
+  } else if (filters.dateWindow === 'weekend') {
+    const dayOfWeek = today.getDay()
+    if (dayOfWeek === 0) {
+      windowStart = toLocalIsoDate(today)
+      windowEnd = windowStart
+    } else {
+      const saturday = addDays(today, dayOfWeek === 6 ? 0 : 6 - dayOfWeek)
+      windowStart = toLocalIsoDate(saturday)
+      windowEnd = toLocalIsoDate(addDays(saturday, 1))
+    }
+  }
 
   return events.filter((event) => {
     const eventEnd = event.endDate ?? event.startDate
     const inDateWindow =
-      filters.dateWindow === 'all' ||
-      (event.startDate <= windowEnd && eventEnd >= todayIso)
+      !windowStart || !windowEnd ||
+      (event.startDate <= windowEnd && eventEnd >= windowStart)
     const inPriceRange =
       filters.price === 'all' ||
       (event.price !== null &&
@@ -192,10 +207,6 @@ export function formatPrice(event: Pick<FamilyEvent, 'category' | 'price'>) {
 
 export function formatStayHours(hours: number) {
   return `約${hours.toLocaleString('ja-JP')}時間`
-}
-
-export function categoryPath(category: EventCategory) {
-  return category === 'kodomoto' ? '/kodomoto' : '/family'
 }
 
 export const reservationLabels = {
