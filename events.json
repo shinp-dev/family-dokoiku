@@ -80,33 +80,6 @@
     "notes": "ランチは11:30〜15:00（L.O.14:30）。仕入れ等により内容変更の場合あり。"
   },
   {
-    "id": "2026-10-11-nakano-wild-chanpuru",
-    "category": "kodomoto",
-    "title": "WILDチャンプルー",
-    "startDate": "2026-10-11",
-    "venueName": "中野四季の森公園 イベントエリア",
-    "address": "東京都中野区中野4丁目13",
-    "lat": 35.707914,
-    "lng": 139.661357,
-    "price": null,
-    "stayHours": 2,
-    "reservation": "not_required",
-    "targetAge": "家族向け・年齢や障害の有無を問わず楽しめるイベント",
-    "tags": [
-      "art",
-      "workshop",
-      "dance",
-      "festival",
-      "food_stalls",
-      "outdoor"
-    ],
-    "summary": "DJやダンスの企画を楽しみながら、グラフィティアーティストによるお絵描きワークショップにも参加できる1日限りのイベント。キッチンカーも登場。",
-    "sourceUrl": "https://www.nakano-kanko.com/event-info/event-3826/",
-    "retrievedDate": "2026-10-10",
-    "officialSource": true,
-    "notes": "11:00〜16:00。ワークショップの参加費は公式案内で確認できず、priceは未設定。中野チャンプルーフェスタとは別イベント。"
-  },
-  {
     "id": "2026-10-17-nakano-flower-green-festival",
     "category": "kodomoto",
     "title": "中野区花と緑の祭典2026秋",
@@ -298,6 +271,33 @@
     "retrievedDate": "2026-10-10",
     "officialSource": true,
     "notes": "11:00〜20:00（最終入場19:30）。10月28日は16:00開始・事前予約者のみ入場可。その他の日は予約優先、空きがある場合に限り当日入場可。参加料金は公式ページで確認できず未設定。"
+  },
+  {
+    "id": "2026-10-30-nakano-yakiimo-fes",
+    "category": "kodomoto",
+    "title": "やきいもフェス TOKYO 2026",
+    "startDate": "2026-10-30",
+    "endDate": "2026-11-08",
+    "venueName": "中野四季の森公園 イベントエリア",
+    "address": "東京都中野区中野4丁目13",
+    "lat": 35.707914,
+    "lng": 139.661357,
+    "price": 0,
+    "priceNote": "入場無料。飲食代別途、会場内はキャッシュレス決済のみ。",
+    "stayHours": 2,
+    "reservation": "not_required",
+    "targetAge": "親子・家族向け",
+    "tags": [
+      "festival",
+      "food_stalls",
+      "outdoor",
+      "seasonal"
+    ],
+    "summary": "焼き芋や芋スイーツなど約30種類のメニューが集まる秋のフードフェス。親子で好みのお芋グルメを探して楽しめる。",
+    "sourceUrl": "https://yakiimofes.jp/tokyo2026/",
+    "retrievedDate": "2026-10-14",
+    "officialSource": true,
+    "notes": "平日11:00〜19:00、土日祝10:00〜19:00。入場無料。会場内の支払いはキャッシュレス決済のみ。"
   },
   {
     "id": "2026-11-01-nakano-zero-space-art",
