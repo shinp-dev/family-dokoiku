@@ -245,6 +245,35 @@
     "notes": "24日10:00〜20:00、25日10:00〜18:00。区役所・公園・中野中学校グラウンドの複数会場。地図ピンは中野区役所。"
   },
   {
+    "id": "2026-10-24-yoyogi-autumn-kids-festa",
+    "category": "kodomoto",
+    "title": "秋のキッズフェスタ2026",
+    "startDate": "2026-10-24",
+    "endDate": "2026-10-25",
+    "venueName": "国立オリンピック記念青少年総合センター",
+    "address": "東京都渋谷区代々木神園町3-1",
+    "lat": 35.6765711,
+    "lng": 139.6948861,
+    "price": 0,
+    "priceNote": "入場無料。一部プログラムは有料。",
+    "stayHours": 3,
+    "reservation": "not_required",
+    "targetAge": "未就学児から小学生・家族向け（企画ごとに対象年齢が異なる）",
+    "tags": [
+      "hands_on",
+      "workshop",
+      "sports",
+      "festival",
+      "indoor",
+      "outdoor"
+    ],
+    "summary": "スポーツ、ものづくり、自然体験など多彩な参加型プログラムが集まる親子向けイベント。予約が必要な企画もある。",
+    "sourceUrl": "https://nyc.niye.go.jp/festa/page/2",
+    "retrievedDate": "2026-10-14",
+    "officialSource": true,
+    "notes": "24日10:30〜17:00、25日10:30〜15:30。入場無料だが一部の体験は有料・事前予約制。各プログラムの詳細を要確認。"
+  },
+  {
     "id": "2026-10-28-sanrio-hello-kitty-lounge",
     "category": "kodomoto",
     "title": "Hello Kitty's Lounge",
