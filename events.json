@@ -164,6 +164,34 @@
     "notes": "10:00〜16:30。通常の体験は事前申込不要。よちよちスクールの10:00枠は事前申込制、その他は当日先着受付。10月18日は事前エントリー制のファミリー仮装大賞も実施。"
   },
   {
+    "id": "2026-10-17-mitaka-kodomo-taiken-park",
+    "category": "kodomoto",
+    "title": "三鷹でやってみよう！第6回こども体験パーク",
+    "startDate": "2026-10-17",
+    "endDate": "2026-10-18",
+    "venueName": "三鷹駅北口 かたらいの道沿道地（武蔵野タワーズ横）",
+    "address": "東京都武蔵野市中町1-17",
+    "lat": 35.7045188,
+    "lng": 139.5608616,
+    "price": 0,
+    "priceNote": "入場無料。ワークショップ参加は内容により材料費が必要。",
+    "stayHours": 2,
+    "reservation": "not_required",
+    "targetAge": "親子・家族向け（誰でも参加可）",
+    "tags": [
+      "craft",
+      "workshop",
+      "hands_on",
+      "halloween",
+      "outdoor"
+    ],
+    "summary": "ハロウィンランタン、蓄光小物、自分だけのノート作り、英語・職業体験などを親子で楽しめる体験ブースが集結。",
+    "sourceUrl": "https://office-breath.com/cw/event/16898/",
+    "retrievedDate": "2026-10-16",
+    "officialSource": true,
+    "notes": "17日11:00〜18:00、18日10:30〜16:00。各ブースは終了30分前最終受付、材料がなくなり次第終了。雨天中止の可能性あり。"
+  },
+  {
     "id": "2026-10-18-shinjuku-treeing",
     "category": "kodomoto",
     "title": "ツリーイング @ SHINJUKU CHUO PARK",
@@ -199,8 +227,8 @@
     "address": "東京都武蔵野市吉祥寺本町2丁目4-14",
     "lat": 35.7061582,
     "lng": 139.5785065,
-    "price": null,
-    "priceNote": "参加費は選択コースによって異なる。参加証は子ども1人につき1枚必要。",
+    "price": 1600,
+    "priceNote": "10月23日（金）は6店舗コース1,600円＋レターパック送料（子ども1人につき参加証1枚）。24・25日分は全コース満員。",
     "stayHours": 2.5,
     "reservation": "required",
     "targetAge": "0歳〜小学生の親子",
@@ -213,9 +241,9 @@
     ],
     "summary": "仮装して吉祥寺の協力店舗を歩き、合言葉を伝えてお菓子を集める街ぐるみのラリー。25日にはキッズ仮装ファッションショーも開催。",
     "sourceUrl": "https://kichijoji-halloween.net/",
-    "retrievedDate": "2026-10-10",
+    "retrievedDate": "2026-10-16",
     "officialSource": true,
-    "notes": "お菓子ラリーは各日11:00〜18:00。事前購入・参加証の郵送が必要。本部の住所を地図ピンに設定（実際は街なかを周遊）。公式サイトでは25日分は満員御礼表示。ファッションショーも要事前申込。"
+    "notes": "お菓子ラリー11:00〜18:00。24日・25日は全コース満員（10月16日確認）。23日も一部コースは満員、申込可能なコースの残数は公式サイトで確認。事前購入・参加証の郵送が必要。本部住所に地図ピン（実際は街なかを周遊）。"
   },
   {
     "id": "2026-10-24-nakano-tohoku-kizuna",
@@ -274,6 +302,34 @@
     "notes": "24日10:30〜17:00、25日10:30〜15:30。入場無料だが一部の体験は有料・事前予約制。各プログラムの詳細を要確認。"
   },
   {
+    "id": "2026-10-24-koenji-parent-workshop-fes",
+    "category": "kodomoto",
+    "title": "高円寺フェス2026 親子ワークショップまつり",
+    "startDate": "2026-10-24",
+    "endDate": "2026-10-25",
+    "venueName": "大東京信用組合 高円寺支店 2階会議室",
+    "address": "東京都杉並区高円寺南4丁目45-4",
+    "lat": 35.7049673,
+    "lng": 139.6504704,
+    "price": 600,
+    "priceNote": "ワークショップごとに無料〜600円。キーホルダー制作・ぬいぐるみ作りなど多くは600円。",
+    "stayHours": 1.5,
+    "reservation": "not_required",
+    "targetAge": "未就学児〜小学生の親子（企画ごとに対象年齢が異なる）",
+    "tags": [
+      "craft",
+      "workshop",
+      "hands_on",
+      "indoor",
+      "festival"
+    ],
+    "summary": "オリジナルキーホルダー、針を使わないぬいぐるみ、アップサイクル工作など、親子向けのものづくり体験が集まる。",
+    "sourceUrl": "https://koenjifes.jp/2026/workshop/",
+    "retrievedDate": "2026-10-16",
+    "officialSource": true,
+    "notes": "10月24・25日11:00〜16:00。参加料金・対象年齢はブースごとに異なり、混雑時は整理券方式の場合あり。高円寺フェス内の体験企画。"
+  },
+  {
     "id": "2026-10-28-sanrio-hello-kitty-lounge",
     "category": "kodomoto",
     "title": "Hello Kitty's Lounge",
@@ -329,6 +385,60 @@
     "notes": "平日11:00〜19:00、土日祝10:00〜19:00。入場無料。会場内の支払いはキャッシュレス決済のみ。"
   },
   {
+    "id": "2026-10-31-beyond-stadium-2026",
+    "category": "kodomoto",
+    "title": "BEYOND STADIUM 2026 ～パラスポーツ大運動会～",
+    "startDate": "2026-10-31",
+    "endDate": "2026-11-01",
+    "venueName": "東京体育館",
+    "address": "東京都渋谷区千駄ケ谷1丁目17-1",
+    "lat": 35.6798199,
+    "lng": 139.7125061,
+    "price": 0,
+    "priceNote": "参加・入場無料。",
+    "stayHours": 3,
+    "reservation": "recommended",
+    "targetAge": "子どもから大人まで（年齢・障害の有無を問わず参加可）",
+    "tags": [
+      "sports",
+      "hands_on",
+      "festival",
+      "indoor"
+    ],
+    "summary": "ボッチャやさまざまなパラスポーツ競技体験、アスリートの特別レッスン、新感覚の運動会プログラムを親子で満喫。",
+    "sourceUrl": "https://www.metro.tokyo.lg.jp/information/press/2026/09/2026091725",
+    "retrievedDate": "2026-10-16",
+    "officialSource": true,
+    "notes": "31日9:40〜18:30、11月1日10:00〜17:00。公式LINE応募フォームから事前登録すると入場がスムーズ。当日会場での申込も可。"
+  },
+  {
+    "id": "2026-10-31-kichijoji-theatre-backstage-tour",
+    "category": "kodomoto",
+    "title": "ぶたいうらのたんけん with妖精大図鑑",
+    "startDate": "2026-10-31",
+    "endDate": "2026-11-01",
+    "venueName": "吉祥寺シアター 劇場",
+    "address": "東京都武蔵野市吉祥寺本町1丁目33-22",
+    "lat": 35.7037862,
+    "lng": 139.5834882,
+    "price": 0,
+    "stayHours": 1,
+    "reservation": "required",
+    "targetAge": "小学生〜高校生（小学生は保護者同伴）",
+    "tags": [
+      "hands_on",
+      "backstage",
+      "theatre",
+      "indoor",
+      "exploration"
+    ],
+    "summary": "普段は入れない劇場の舞台裏を、創作ユニット「妖精大図鑑」と一緒に探検。劇場の仕事や舞台づくりの秘密に触れるツアー。",
+    "sourceUrl": "https://www.musashino.or.jp/k_theatre/1002068/1002069/1009794.html",
+    "retrievedDate": "2026-10-16",
+    "officialSource": true,
+    "notes": "両日10:00・13:00・16:00開始、各60分。各回子ども15名先着順で要事前申込（公式サイトでは受付中）。保護者も申込が必要。階段・高所見学があるため歩きやすい靴推奨。"
+  },
+  {
     "id": "2026-11-01-nakano-zero-space-art",
     "category": "kodomoto",
     "title": "なかのZEROに宇宙を描こう！第2回ワークショップ",
@@ -352,32 +462,6 @@
     "retrievedDate": "2026-10-03",
     "officialSource": true,
     "notes": "13:00〜14:30、15:00〜16:30の2回。各回30名程度。申込期限10月21日、定員超過時抽選。汚れてもよい服・靴推奨。参加費は公式ページで確認できず未設定。"
-  },
-  {
-    "id": "2026-11-07-nakano-food-workshop",
-    "category": "kodomoto",
-    "title": "食の体験ワークショップ おにぎり作り＆食べ比べ",
-    "startDate": "2026-11-07",
-    "endDate": "2026-11-08",
-    "venueName": "中野区役所1階カフェテリア「ナカノヤ NYAcafe」",
-    "address": "東京都中野区中野4丁目11-19",
-    "lat": 35.708958,
-    "lng": 139.662901,
-    "price": 0,
-    "stayHours": 1,
-    "reservation": "required",
-    "targetAge": "小学生以上中学生以下（小学生は保護者引率）",
-    "tags": [
-      "food",
-      "hands_on",
-      "workshop",
-      "indoor"
-    ],
-    "summary": "喜多方市・常陸太田市・みなかみ町・館山市の新米でおにぎりを作り、食べ比べ。お米マイスターの実演と各地の特産品試食も楽しめる。",
-    "sourceUrl": "https://www.city.tokyo-nakano.lg.jp/kanko/machirenkei/shotengai_sinmai.html",
-    "retrievedDate": "2026-10-10",
-    "officialSource": true,
-    "notes": "各日10:00〜10:45・14:00〜14:45、各回10名。先着順。10月7日8:30時点で11月7日午前と11月8日両回は満席、11月7日午後のみ申込受付中（10月10日確認）。公式ページで最新の空き状況を確認。"
   },
   {
     "id": "2026-11-07-nakano-wagakki-workshop",
